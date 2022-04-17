@@ -2,7 +2,7 @@
 //  SampleApp.swift
 //  Shared
 //
-//  Created by GalahadPersival on 18.02.2022.
+//  Created by Utah011 on 18.02.2022.
 //
 
 import SwiftUI

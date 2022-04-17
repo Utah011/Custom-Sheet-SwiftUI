@@ -2,20 +2,40 @@
 //  ContentView.swift
 //  Shared
 //
-//  Created by GalahadPersival on 18.02.2022.
+//  Created by Utah011 on 18.02.2022.
 //
 
 import SwiftUI
 
-struct ContentView: View {
-    var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
-}
+//MARK: Prepare pans using enum PanManager.Pan
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+struct ContentView: View {
+    
+    @StateObject var panManager = PanManager()
+    let screenSize = UIScreen.main.bounds
+    
+    var body: some View {
+        ZStack {
+            SimpleTabView()
+            
+            if panManager.show {
+                switch panManager.pan {
+                case .firstView:
+                    PanView(screenSize: screenSize, type: .high) {
+                        PresentedView()
+                    }
+                case .secondView:
+                    PanView(screenSize: screenSize, type: .medium) {
+                        PresentedView()
+                    }
+                case .thirdView:
+                    PanView(screenSize: screenSize, type: .low) {
+                        PresentedView()
+                    }
+                case .none:
+                    EmptyView()
+                }
+            }
+        }.environmentObject(panManager)
     }
 }
